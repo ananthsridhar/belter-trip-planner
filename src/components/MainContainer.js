@@ -4,45 +4,34 @@ import DestinationDrawerComponent from "./drawer/DestinationDrawerComponent";
 
 import { Container } from "@material-ui/core";
 
-import AddButtonComponent from "./AddButtonComponent";
+import { connect } from "react-redux";
+import { setDestinations, getAllDestinations } from "../actions/DestinationActions";
+import fetchDestinations from "../services/fetchDestinations";
 
+import AddButtonComponent from "./AddButtonComponent";
 import DestinationService from "../services/DestinationService";
 
-export default class Destinations extends React.Component {
-  constructor() {
-    super();
+class Destinations extends React.Component {
+  constructor(props) {
+    super(props);
     this.destinationService = new DestinationService();
     this.state = {
       drawer: false,
-      currentDest: -1
+      currentDest: -1,
+      destinations: []
     };
     this.toggleDrawer = this.toggleDrawer.bind(this);
     this.addDestination = this.addDestination.bind(this);
+    this.shouldComponentRender = this.shouldComponentRender.bind(this);
   }
 
   componentDidMount() {
-    let dests = this.destinationService.getData();
-    console.log(dests);
-    let self = this;
-    fetch("https://www.mocky.io/v2/5da86115120000d0d1edae38")
-      .then(res => res.json())
-      .then(data => {
-        //console.log(data);
-        self.setState({
-          destinations: data
-        });
-      })
-      .catch(console.error);
-    // this.setState({
-    //   destinations: this.destinationService.getDestinationsFromService()
-    // });
-    // console.log(dest);
-    // dest.then(data => {
-    //   console.log(data);
-    //   this.setState({
-    //     destinations: data
-    //   });
-    // });
+    const {fetchDestinations} = this.props;
+    fetchDestinations();
+    //console.log(this.props.destinations);
+    this.setState({
+      destinations: this.props.destinations
+    })
   }
 
   toggleDrawer(open, addDest = false, destId) {
@@ -51,6 +40,13 @@ export default class Destinations extends React.Component {
       addDest: addDest,
       currentDest: destId ? destId : -1
     });
+  }
+
+  shouldComponentRender() {
+    const {pending} = this.props;
+    if (this.pending === false) return false;
+    // more tests
+    return true;
   }
 
   addDestination() {
@@ -66,7 +62,8 @@ export default class Destinations extends React.Component {
 
   render() {
     // let match = useRouteMatch();
-    let destinations = this.state.destinations ? this.state.destinations : [];
+    let destinations = this.props.destinations;
+    if (!this.shouldComponentRender()) return (<p>Loading</p>)
     return (
       <Container maxWidth="lg">
         <div>
@@ -84,13 +81,6 @@ export default class Destinations extends React.Component {
               </div>
             );
           })}
-          {/* <DestCard
-            dest={{ name: "Destination1" }}
-            destId="22"
-            onClick={() => this.toggleDrawer(true)}
-          /> */}
-          {/* <AddButtonComponent onClick={() => this.toggleDrawer(true, true)} /> */}
-          {/* <DestCard destId="22" onClick={() => this.toggleDrawer(true)} /> */}
 
           <DestinationDrawerComponent
             drawer={this.state.drawer}
@@ -104,3 +94,9 @@ export default class Destinations extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  const {destinations, pending} = state;
+  return { destinations, pending };
+}
+export default connect(mapStateToProps, { setDestinations, getAllDestinations, fetchDestinations })(Destinations);

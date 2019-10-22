@@ -1,13 +1,14 @@
-import { destinations as mockDest } from "../mock/mockDestinations";
+// import { destinations as mockDest } from "../mock/mockDestinations";
 
 export default class DestinationService {
   constructor() {
-    this.destinations = [];
+
     //console.log(this.destinations);
     this.getData = this.getData.bind(this);
     this.getDestinationsFromService = this.getDestinationsFromService.bind(
       this
     );
+    //this.destinations = this.getData();
     // this.getDestinationsFromService();
   }
 
@@ -17,7 +18,9 @@ export default class DestinationService {
   }
 
   getDestination(id) {
-    return this.destinations.filter(dest => dest.id === id)[0];
+    if (this.destination) {
+      return this.destinations.filter(dest => dest.id === id)[0];
+    }
   }
 
   addAfter(prevDest) {
@@ -30,11 +33,12 @@ export default class DestinationService {
   }
 
   getDestinationsFromService() {
-    return fetch("https://www.mocky.io/v2/5da84f4c120000d0d1edad6c")
+    return fetch("http://www.mocky.io/v2/5da948373100005d004e0759")
       .then(res => res.json())
       .then(data => {
         //console.log(data);
-        this.destinations = data;
+        // this.destinations = data;
+        return data;
       })
       .catch(console.error);
   }

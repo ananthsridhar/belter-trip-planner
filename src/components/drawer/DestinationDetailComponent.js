@@ -1,5 +1,7 @@
 import React from "react";
-import { Grid, Paper, Card, makeStyles } from "@material-ui/core";
+import { Grid, Card, makeStyles } from "@material-ui/core";
+
+import { connect } from 'react-redux';
 
 import DestinationService from "../../services/DestinationService";
 
@@ -8,10 +10,10 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2)
   }
 }));
-export default function DestinationDetail(props) {
+function DestinationDetail(props) {
   const classes = useStyles();
   let destinationService = new DestinationService();
-  let destination = destinationService.getDestination(props.destId);
+  let destination = props.destinations.filter((dest) => dest.id === props.destId)[0];
   let cards;
   if (destination) {
     cards = destination.cards;
@@ -30,3 +32,13 @@ export default function DestinationDetail(props) {
     </div>
   );
 }
+
+const mapStateToProps = state => ({
+  destinations: state.destinations
+})
+
+
+
+export default connect(
+  mapStateToProps, {})(DestinationDetail);
+
