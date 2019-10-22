@@ -28,12 +28,12 @@ class Destinations extends React.Component {
   componentDidMount() {
     const {fetchDestinations} = this.props;
     fetchDestinations();
-    //console.log(this.props.destinations);
     this.setState({
       destinations: this.props.destinations
     })
   }
 
+  //Toggling the Information drawer
   toggleDrawer(open, addDest = false, destId) {
     this.setState({
       drawer: open,
@@ -49,6 +49,8 @@ class Destinations extends React.Component {
     return true;
   }
 
+
+  //TODO : Plug in functionality for when Destination is Added
   addDestination() {
     //console.log("Clicked");
     this.setState({
@@ -61,7 +63,6 @@ class Destinations extends React.Component {
   }
 
   render() {
-    // let match = useRouteMatch();
     let destinations = this.props.destinations;
     if (!this.shouldComponentRender()) return (<p>Loading</p>)
     return (

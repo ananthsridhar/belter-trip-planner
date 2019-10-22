@@ -27,6 +27,7 @@ export default function DestinationDrawerComponent(props) {
     props.onAddDestination(dest);
   };
 
+  //Template for Destination Page 
   const destDetail = () => (
     <div
       className={classes.drawerStyle}
@@ -39,6 +40,7 @@ export default function DestinationDrawerComponent(props) {
     </div>
   );
 
+  //Template for Add Destination Page
   const addDestination = () => (
     <div className={classes.drawerStyle} role="presentation">
       <p>Adding Destination</p>
@@ -53,6 +55,7 @@ export default function DestinationDrawerComponent(props) {
   return (
     <Drawer anchor="bottom" open={props.drawer} onClose={toggleDrawer(false)}>
       <Container fixed>
+        {/*Displaying information based on if Adding Destination or Destination Detail page*/}
         {!props.addDest && destDetail()}
         {props.addDest && addDestination()}
       </Container>

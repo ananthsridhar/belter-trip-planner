@@ -12,7 +12,6 @@ const useStyles = makeStyles(theme => ({
 }));
 function DestinationDetail(props) {
   const classes = useStyles();
-  let destinationService = new DestinationService();
   let destination = props.destinations.filter((dest) => dest.id === props.destId)[0];
   let cards;
   if (destination) {
