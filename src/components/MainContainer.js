@@ -69,15 +69,16 @@ class Destinations extends React.Component {
       <Container maxWidth="lg">
         <div>
           <h2>Destinations</h2>
-          {destinations.map(dest => {
+          {destinations.map((dest,index) => {
+            console.log(dest.id)
             return (
-              <div key={dest.id}>
+              <div key={index}>
                 <DestCard
                   dest={dest}
                   onClick={e => this.toggleDrawer(true, false, dest.id)}
                 />
                 <AddButtonComponent
-                  onClick={() => this.toggleDrawer(true, true, dest.id)}
+                  onClick={() => this.toggleDrawer(true, true, index)}
                 />
               </div>
             );

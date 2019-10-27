@@ -5,6 +5,11 @@ import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 
 import DestinationService from "../../services/DestinationService";
+import Destination from "../../model/Destination";
+
+import {addDestination} from "../../actions/DestinationActions";
+
+import { connect } from 'react-redux';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -28,15 +33,17 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function AddDestinationComponent(props) {
+function AddDestinationComponent(props) {
   const classes = useStyles();
   const [destination, setDestination] = React.useState("");
   let destinationService = new DestinationService();
   const addDest = () => {
     // console.log(destination);
-    destinationService.addAfter(props.afterDestId);
-    props.onAddDestination(destination);
+    // destinationService.addAfter(props.afterDestId);
+    // props.onAddDestination(destination);
     // destinationService.addAfter(props.afterDestId)
+    let newDest = new Destination(destination);
+    props.addDestination(newDest,props.afterDestId);
   };
 
   return (
@@ -52,6 +59,20 @@ export default function AddDestinationComponent(props) {
         <SearchIcon />
       </IconButton>
       <Button onClick={addDest}>Add</Button>
+      <Button onClick={addDest}>Cancel</Button>
     </Paper>
   );
 }
+
+
+const mapStateToProps = state => ({
+  destinations: state.destinations
+})
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addDestination : (destination,afterDestId) => dispatch(addDestination(destination,afterDestId)),
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(AddDestinationComponent);
