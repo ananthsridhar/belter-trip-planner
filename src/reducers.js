@@ -5,8 +5,12 @@ import {
 } from "./actions/DestinationActions";
 
 import { destinations } from "./mock/mockDestinations";
+import {Trip} from "./model/Trip";
 
 const initialState = {
+    currentTrip:0,
+    trips:[],
+    trip:new Trip(),
     destinations: [],
     pending: false,
     error: null
@@ -14,7 +18,6 @@ const initialState = {
 
 
 export default function destinationReducer(state = initialState, action) {
-    //console.log(action);
     switch (action.type) {
         case FETCH_DESTINATIONS_PENDING:
             return {
@@ -23,6 +26,12 @@ export default function destinationReducer(state = initialState, action) {
             }
         case FETCH_DESTINATIONS_SUCCESS:
             return Object.assign({}, state, {
+                trips:[{
+                    _destinations: action.destinations,
+                }],
+                trip:{
+                    _destinations: action.destinations,
+                },
                 destinations: action.destinations,
                 pending: false
             });
@@ -34,12 +43,23 @@ export default function destinationReducer(state = initialState, action) {
             }
         case SET_DESTINATIONS:
             return Object.assign({}, state, {
+                trips:[{
+                    destinations: [...state.destinations, action.destinations],
+                }],
+                trip:{
+                    _destinations: [...state.destinations, action.destinations],
+                },
                 destinations: [...state.destinations, action.destinations]
             });
         case ADD_DESTINATION:
-            console.log([state.destinations.slice(0,action.position-1),action.destination,state.destinations.slice(action.position,state.destinations.length-1)]);
             return Object.assign({}, state, {
-                destinations: [...state.destinations.slice(0,action.position),action.destination,...state.destinations.slice(action.position,state.destinations.length-1)]
+                trips:[{
+                    _destinations: [...state.destinations.slice(0,action.position),action.destination,...state.destinations.slice(action.position)],
+                }],
+                trip:{
+                    _destinations: [...state.destinations.slice(0,action.position),action.destination,...state.destinations.slice(action.position)],
+                },
+                destinations: [...state.destinations.slice(0,action.position),action.destination,...state.destinations.slice(action.position)]
             });
         case GET_ALL_DESTINATIONS:
             return state.destinations;

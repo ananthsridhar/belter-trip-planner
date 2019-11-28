@@ -19,7 +19,6 @@ const useStyles = makeStyles({
 
 export default function DestCard(props) {
   const classes = useStyles();
-  // console.log(props);
   return (
     <div onClick={props.onClick}>
       <Card className={classes.card}>

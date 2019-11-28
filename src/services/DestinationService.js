@@ -13,7 +13,6 @@ export default class DestinationService {
   }
 
   async getData() {
-    //return await this.getDestinationsFromService();
     return await this.getDestinationsFromService();
   }
 
@@ -29,7 +28,7 @@ export default class DestinationService {
   }
 
   updateData(destination, newData) {
-    //Update data likea dding "widgets" etc.
+    //Update data like adding "widgets" etc.
   }
 
   getDestinationsFromService() {

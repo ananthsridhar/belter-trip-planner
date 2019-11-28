@@ -16,7 +16,6 @@ const useStyles = makeStyles(theme => ({
     padding: "2px 4px",
     display: "flex",
     alignItems: "center",
-    width: 400,
     border: "2px solid #568cf0",
     borderRadius: "10px"
   },
@@ -38,12 +37,9 @@ function AddDestinationComponent(props) {
   const [destination, setDestination] = React.useState("");
   let destinationService = new DestinationService();
   const addDest = () => {
-    // console.log(destination);
-    // destinationService.addAfter(props.afterDestId);
-    // props.onAddDestination(destination);
-    // destinationService.addAfter(props.afterDestId)
     let newDest = new Destination(destination);
-    props.addDestination(newDest,props.afterDestId);
+    props.addDestination(newDest,props.afterDestId+1);
+    props.onAddDestination(destination);
   };
 
   return (
@@ -59,7 +55,6 @@ function AddDestinationComponent(props) {
         <SearchIcon />
       </IconButton>
       <Button onClick={addDest}>Add</Button>
-      <Button onClick={addDest}>Cancel</Button>
     </Paper>
   );
 }

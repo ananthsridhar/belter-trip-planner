@@ -29,7 +29,8 @@ class Destinations extends React.Component {
     const {fetchDestinations} = this.props;
     fetchDestinations();
     this.setState({
-      destinations: this.props.destinations
+      trip: this.props.trips[this.props.currentTrip],
+      // destinations: this.props.trip[this.props.currentTrip]._destinations
     })
   }
 
@@ -52,33 +53,31 @@ class Destinations extends React.Component {
 
   //TODO : Plug in functionality for when Destination is Added
   addDestination() {
-    //console.log("Clicked");
     this.setState({
       drawer: true,
       addDest: true
     });
   }
-  onAddDestination(dest) {
-    //console.log(dest);
-  }
 
   render() {
-    let destinations = this.props.destinations;
+    let destinations = this.props.trips[this.props.currentTrip]?this.props.trips[this.props.currentTrip]._destinations:[];
     if (!this.shouldComponentRender()) return (<p>Loading</p>)
     return (
       <Container maxWidth="lg">
         <div>
           <h2>Destinations</h2>
+           <AddButtonComponent
+                  onClick={() => this.toggleDrawer(true, true, 0)}
+                />
           {destinations.map((dest,index) => {
-            console.log(dest.id)
             return (
-              <div key={index}>
+              <div key={index+1}>                
                 <DestCard
                   dest={dest}
                   onClick={e => this.toggleDrawer(true, false, dest.id)}
                 />
                 <AddButtonComponent
-                  onClick={() => this.toggleDrawer(true, true, index)}
+                  onClick={() => this.toggleDrawer(true, true, index+1)}
                 />
               </div>
             );
@@ -88,7 +87,6 @@ class Destinations extends React.Component {
             drawer={this.state.drawer}
             toggleDrawer={this.toggleDrawer}
             addDest={this.state.addDest}
-            onAddDestination={this.onAddDestination}
             currentDest={this.state.currentDest}
           />
         </div>
@@ -98,7 +96,7 @@ class Destinations extends React.Component {
 }
 
 const mapStateToProps = state => {
-  const {destinations, pending} = state;
-  return { destinations, pending };
+  const {currentTrip, trips, destinations, pending} = state;
+  return { currentTrip, trips, destinations, pending };
 }
 export default connect(mapStateToProps, { setDestinations, getAllDestinations, fetchDestinations })(Destinations);

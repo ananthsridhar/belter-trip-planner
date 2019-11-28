@@ -10,7 +10,6 @@ export default function fetchDestinations(){
             if(res.error) {
                 throw(res.error);
             }
-            //console.log(res);
             dispatch(fetchDestinationsSuccess(res));
             return res.products;
         })

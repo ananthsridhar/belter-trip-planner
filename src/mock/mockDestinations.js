@@ -1,3 +1,9 @@
+
+export const trip = {
+  id: "12",
+  destinations: destinations
+}
+
 export const destinations = [
   {
     id: "1",

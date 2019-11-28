@@ -8,7 +8,6 @@ export default function DestinationDrawerComponent(props) {
   const useStyles = makeStyles({
     drawerStyle: {
       width: "auto",
-      height: "100vh"
     }
   });
   const classes = useStyles();
@@ -23,8 +22,8 @@ export default function DestinationDrawerComponent(props) {
   };
 
   const onAddDestination = dest => {
-    props.toggleDrawer(false);
-    props.onAddDestination(dest);
+    if(!dest)
+      props.toggleDrawer(false);
   };
 
   //Template for Destination Page 
@@ -32,11 +31,9 @@ export default function DestinationDrawerComponent(props) {
     <div
       className={classes.drawerStyle}
       role="presentation"
-      // onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
     >
       <DestinationDetail destId={props.currentDest} />
-      {/* <Button onClick={() => toggleDrawer(false)}>Close</Button> */}
     </div>
   );
 
@@ -46,20 +43,19 @@ export default function DestinationDrawerComponent(props) {
       <p>Adding Destination</p>
       <AddDestinationComponent
         afterDestId={props.currentDest}
-        onAddDestination={onAddDestination}
+        onAddDestination={(dest)=>onAddDestination()}
       />
-      {/* <Button onClick={toggleDrawer(false)}>Close</Button> */}
     </div>
   );
 
   return (
     <Drawer anchor="bottom" open={props.drawer} onClose={toggleDrawer(false)}>
-      <Container fixed>
+      <Container fixed style={{height:'100vh'}}>
         {/*Displaying information based on if Adding Destination or Destination Detail page*/}
         {!props.addDest && destDetail()}
         {props.addDest && addDestination()}
       </Container>
-      <Button onClick={toggleDrawer(false)}>Close</Button>
+      <Button color="primary" variant="outlined" onClick={toggleDrawer(false)}>Close</Button>
     </Drawer>
   );
 }
