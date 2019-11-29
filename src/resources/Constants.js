@@ -1,8 +1,8 @@
 
 
 
-export const CARD_TYPES = {
-    WEATHER : 'weather',
-    MAP : 'map',
-    NOTE : 'note'
+export const WIDGET_TYPES = {
+    WEATHER : 'Weather',
+    MAP : 'Map',
+    NOTE : 'Notes'
 }

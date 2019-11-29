@@ -1,4 +1,6 @@
 
+import {WIDGET_TYPES} from '../resources/Constants';
+
 export const trip = {
   id: "12",
   destinations: destinations
@@ -9,16 +11,16 @@ export const destinations = [
     id: "1",
     name: "Chennai",
     location: "<coords>",
-    cards: [
+    widgets: [
       {
-        type: "Weather",
+        type: WIDGET_TYPES.WEATHER,
         data: {
           text: "What did you expect?WEather is Hot AF, as usual",
           temperature: "36"
         }
       },
       {
-        type: "Notes",
+        type: WIDGET_TYPES.NOTE,
         data: {
           type: "Note",
           color: "slate",
@@ -26,7 +28,7 @@ export const destinations = [
         }
       },
       {
-        type: "Map",
+        type: WIDGET_TYPES.MAP,
         data: {
           location: "Coordinates",
           text: "Sample Map Here"
@@ -38,16 +40,16 @@ export const destinations = [
     id: "2",
     name: "Hampi",
     location: "<coords>",
-    cards: [
+    widgets: [
       {
-        type: "Weather",
+        type: WIDGET_TYPES.WEATHER,
         data: {
           text: "What did you expect?WEather is Hot AF, as usual",
           temperature: "36"
         }
       },
       {
-        type: "Notes",
+        type: WIDGET_TYPES.NOTE,
         data: {
           type: "Note",
           color: "slate",
@@ -55,7 +57,7 @@ export const destinations = [
         }
       },
       {
-        type: "Map",
+        type: WIDGET_TYPES.MAP,
         data: {
           location: "Coordinates",
           text: "Sample Map Here"
