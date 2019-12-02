@@ -27,7 +27,6 @@ function DestinationDetail(props) {
           widgets.map((widget, index) => (
             <Grid key={index} item xs={6}>
               <Widget widget={widget}/>
-              {/*<Card className={classes.widget}>{card.type}</Card>*/}
             </Grid>
           ))}
           <Grid item xs={12}>

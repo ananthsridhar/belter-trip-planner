@@ -7,21 +7,6 @@ const useStyles = makeStyles(theme => ({
         padding: theme.spacing(2)
     }
 }));
-// export default class WidgetComponent extends React.Component {
-//     constructor(props) {
-//         super(props);
-//     }
-
-
-//     render() {
-//         const classes = useStyles();
-//         return (
-//             <Card className={classes.widget}>{this.props.card.type}</Card>
-//         )
-//     }
-
-
-// }
 
 export default function WidgetComponent(props) {
     const classes = useStyles();
