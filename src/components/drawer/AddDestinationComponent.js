@@ -38,7 +38,7 @@ function AddDestinationComponent(props) {
   let destinationService = new DestinationService();
   const addDest = () => {
     let newDest = new Destination(destination);
-    props.addDestination(newDest,props.afterDestId+1);
+    props.addDestination(newDest,props.addPos);
     props.onAddDestination(destination);
   };
 
@@ -66,7 +66,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    addDestination : (destination,afterDestId) => dispatch(addDestination(destination,afterDestId)),
+    addDestination : (destination,addPos) => dispatch(addDestination(destination,addPos)),
   }
 }
 

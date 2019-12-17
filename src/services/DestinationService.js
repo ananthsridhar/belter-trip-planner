@@ -32,7 +32,7 @@ export default class DestinationService {
   }
 
   getDestinationsFromService() {
-    return fetch("http://www.mocky.io/v2/5da948373100005d004e0759")
+    return fetch("http://www.mocky.io/v2/5de0b1b53500008665480d28")
       .then(res => res.json())
       .then(data => {
         //console.log(data);

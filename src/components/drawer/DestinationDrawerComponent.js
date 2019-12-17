@@ -42,7 +42,7 @@ export default function DestinationDrawerComponent(props) {
     <div className={classes.drawerStyle} role="presentation">
       <p>Adding Destination</p>
       <AddDestinationComponent
-        afterDestId={props.currentDest}
+        addPos={props.currentDest}
         onAddDestination={(dest)=>onAddDestination()}
       />
     </div>

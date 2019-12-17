@@ -2,6 +2,7 @@ import React from "react";
 import { Grid, Card, makeStyles } from "@material-ui/core";
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import Widget from "../widgets/WidgetComponent";
+import { SCREEN_LABELS } from "../../resources/Constants";
 
 import { connect } from 'react-redux';
 
@@ -30,7 +31,7 @@ function DestinationDetail(props) {
             </Grid>
           ))}
           <Grid item xs={12}>
-            <h3>{widgets && widgets.length>0?'':"Looks like you haven't added any widgets yet. Click the Add sign to try out some now"}</h3>
+            <h3>{widgets && widgets.length>0?'':SCREEN_LABELS.NO_WIDGETS}</h3>
             <AddCircleOutlineIcon className={classes.iconHover} color="primary" style={{ fontSize: 75 }}/>
           </Grid>
       </Grid>
@@ -41,7 +42,6 @@ function DestinationDetail(props) {
 const mapStateToProps = state => ({
   destinations: state.destinations
 })
-
 
 
 export default connect(

@@ -39,7 +39,7 @@ class Destinations extends React.Component {
     this.setState({
       drawer: open,
       addDest: addDest,
-      currentDest: destId ? destId : -1
+      currentDest: destId>=0 ? destId : -1
     });
   }
 

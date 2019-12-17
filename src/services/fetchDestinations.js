@@ -4,7 +4,7 @@ import {fetchDestinationsPending,fetchDestinationsSuccess,fetchDestinationsError
 export default function fetchDestinations(){
     return dispatch => {
         dispatch(fetchDestinationsPending());
-        fetch('http://www.mocky.io/v2/5de0b1b53500008665480d28')
+        fetch(process.env.REACT_APP_MOCK_API)
         .then(res => res.json())
         .then(res => {
             if(res.error) {

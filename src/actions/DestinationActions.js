@@ -50,7 +50,7 @@ export function fetchDestinationsError(error) {
 export function addDestination(dest,prevPos){
     return {
         type : ADD_DESTINATION,
-        position : prevPos+1,
+        position : prevPos,
         destination:dest
     }
 }
