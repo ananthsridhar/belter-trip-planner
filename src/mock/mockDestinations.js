@@ -1,11 +1,6 @@
 
 import {WIDGET_TYPES} from '../resources/Constants';
 
-export const trip = {
-  id: "12",
-  destinations: destinations
-}
-
 export const destinations = [
   {
     id: "1",
@@ -66,3 +61,9 @@ export const destinations = [
     ]
   }
 ];
+
+
+export const trip = {
+  id: "12",
+  destinations: destinations
+}

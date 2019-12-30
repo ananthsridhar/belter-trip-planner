@@ -3,13 +3,13 @@ import {WIDGET_TYPES} from '../resources/Constants';
 
 export default class Destination {
     constructor(destinationName){
-        this._id = Math.random()*100;
+        this.id = Math.floor(Math.random()*100);
         this.name = destinationName;
         this.widget = [new Widget(WIDGET_TYPES.WEATHER)];
     }
 
     getId(){
-        return this._id;
+        return this.id;
     }
 
     addCard(widgetType,data){
