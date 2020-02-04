@@ -3,6 +3,7 @@
 export class Trip {
     constructor(){
         this._id = Math.trunc(Math.random()*1000);
+        this._name = 'Trip' + this._id;
         this._destinations = [];
     }
 
@@ -12,6 +13,10 @@ export class Trip {
 
     getDestinations(){
         return this._destinations;
+    }
+
+    getName() {
+        return this._name;
     }
 
     findDestinations(name){
