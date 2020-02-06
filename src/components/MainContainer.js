@@ -60,7 +60,7 @@ class Destinations extends React.Component {
   }
 
   render() {
-    let destinations = this.props.trips[this.props.currentTrip]?this.props.trips[this.props.currentTrip]._destinations:[];
+    let destinations = this.props.trips[this.props.currentTrip]?this.props.trips[this.props.currentTrip].destinations:[];
     if (!this.shouldComponentRender()) return (<p>Loading</p>)
     return (
       <Container maxWidth="lg">

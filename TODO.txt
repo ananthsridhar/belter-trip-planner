@@ -1,0 +1,2 @@
+1. Sidebar Added. 
+2. Change store to handle multiple trips - Add Destination, etc

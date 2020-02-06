@@ -7,6 +7,10 @@ export const FETCH_DESTINATIONS_PENDING = 'FETCH_DESTINATIONS_PENDING';
 export const FETCH_DESTINATIONS_SUCCESS = 'FETCH_DESTINATIONS_SUCCESS';
 export const FETCH_DESTINATIONS_ERROR = 'FETCH_DESTINATIONS_ERROR';
 
+export const FETCH_TRIPS_PENDING = 'FETCH_DESTINATIONS_PENDING';
+export const FETCH_TRIPS_SUCCESS = 'FETCH_TRIPS_SUCCESS';
+export const FETCH_TRIPS_ERROR = 'FETCH_DESTINATIONS_ERROR';
+
 export function getDestination(id) {
     return {
         type: GET_DESTINATION,
@@ -37,6 +41,13 @@ export function fetchDestinationsSuccess(destinations) {
     return {
         type: FETCH_DESTINATIONS_SUCCESS,
         destinations
+    }
+}
+
+export function fetchTripsSuccess(trips) {
+    return {
+        type: FETCH_TRIPS_SUCCESS,
+        trips
     }
 }
 
