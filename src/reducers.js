@@ -1,17 +1,17 @@
 import {
     GET_DESTINATION, GET_ALL_DESTINATIONS, SET_DESTINATIONS, FETCH_DESTINATIONS_PENDING,
     FETCH_DESTINATIONS_SUCCESS,
-    FETCH_TRIPS_SUCCESS,
+    FETCH_TRIPS_SUCCESS, CHANGE_TRIP,
     FETCH_DESTINATIONS_ERROR, ADD_DESTINATION
 } from "./actions/DestinationActions";
 
 import { destinations } from "./mock/mockDestinations";
-import {Trip} from "./model/Trip";
+import { Trip } from "./model/Trip";
 
 const initialState = {
-    currentTrip:0,
-    trips:[],
-    trip:new Trip(),
+    currentTrip: 0,
+    trips: [],
+    trip: new Trip(),
     destinations: [],
     pending: false,
     error: null
@@ -28,20 +28,19 @@ export default function destinationReducer(state = initialState, action) {
             }
         case FETCH_DESTINATIONS_SUCCESS:
             return Object.assign({}, state, {
-                trips:[{
+                trips: [{
                     _destinations: action.destinations,
                 }],
-                trip:{
+                trip: {
                     _destinations: action.destinations,
                 },
                 destinations: action.destinations,
                 pending: false
             });
         case FETCH_TRIPS_SUCCESS:
-            console.log(action.trips);
             return Object.assign({}, state, {
-                trips:action.trips,
-                trip:action.trips[0],
+                trips: action.trips,
+                trip: action.trips[0],
                 destinations: action.trips[0].destinations,
                 pending: false
             });
@@ -53,28 +52,33 @@ export default function destinationReducer(state = initialState, action) {
             }
         case SET_DESTINATIONS:
             return Object.assign({}, state, {
-                trips:[{
+                trips: [{
                     destinations: [...state.destinations, action.destinations],
                 }],
-                trip:{
+                trip: {
                     destinations: [...state.destinations, action.destinations],
                 },
                 destinations: [...state.destinations, action.destinations]
             });
         case ADD_DESTINATION:
-            return Object.assign({}, state, {
-                trips:[{
-                    destinations: [...state.destinations.slice(0,action.position),action.destination,...state.destinations.slice(action.position)],
-                }],
-                trip:{
-                    destinations: [...state.destinations.slice(0,action.position),action.destination,...state.destinations.slice(action.position)],
-                },
-                destinations: [...state.destinations.slice(0,action.position),action.destination,...state.destinations.slice(action.position)]
-            });
+            return addDestination(state, action);
         case GET_ALL_DESTINATIONS:
             return state.destinations;
+        case CHANGE_TRIP:
+            return Object.assign({}, state, { currentTrip: state.trips.findIndex((trip) => trip.id == action.tripId) })
         default: return state
     }
+}
+
+const addDestination = (state, action) => {
+    const oldDests = state.trips[state.currentTrip].destinations;
+    const updatedTrip = Object.assign({}, state.trips[state.currentTrip], {
+        destinations: [...oldDests.slice(0, action.position), action.destination, ...oldDests.slice(action.position)]
+    });
+    console.log(updatedTrip);
+    return Object.assign({}, state, {
+        trips: state.trips.map((item, index) => index !== state.currentTrip ? item : updatedTrip)
+    });
 }
 
 export const getDestinations = state => state.destinations;

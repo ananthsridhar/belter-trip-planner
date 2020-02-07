@@ -11,6 +11,8 @@ export const FETCH_TRIPS_PENDING = 'FETCH_DESTINATIONS_PENDING';
 export const FETCH_TRIPS_SUCCESS = 'FETCH_TRIPS_SUCCESS';
 export const FETCH_TRIPS_ERROR = 'FETCH_DESTINATIONS_ERROR';
 
+export const CHANGE_TRIP = 'CHANGE_TRIP';
+
 export function getDestination(id) {
     return {
         type: GET_DESTINATION,
@@ -63,5 +65,12 @@ export function addDestination(dest,prevPos){
         type : ADD_DESTINATION,
         position : prevPos,
         destination:dest
+    }
+}
+
+export function changeTrip(tripId) {
+    return {
+        type : CHANGE_TRIP,
+        tripId
     }
 }

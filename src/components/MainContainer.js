@@ -39,7 +39,7 @@ class Destinations extends React.Component {
     this.setState({
       drawer: open,
       addDest: addDest,
-      currentDest: destId>=0 ? destId : -1
+      currentDest: destId >= 0 ? destId : -1
     });
   }
 
@@ -60,24 +60,24 @@ class Destinations extends React.Component {
   }
 
   render() {
-    let destinations = this.props.trips[this.props.currentTrip]?this.props.trips[this.props.currentTrip].destinations:[];
+    let destinations = this.props.trips[this.props.currentTrip] ? this.props.trips[this.props.currentTrip].destinations : [];
     if (!this.shouldComponentRender()) return (<p>Loading</p>)
     return (
       <Container maxWidth="lg">
         <div>
           <h2>Destinations</h2>
-           <AddButtonComponent
-                  onClick={() => this.toggleDrawer(true, true, 0)}
-                />
-          {destinations.map((dest,index) => {
+          <AddButtonComponent
+            onClick={() => this.toggleDrawer(true, true, 0)}
+          />
+          {destinations.map((dest, index) => {
             return (
-              <div key={index+1}>                
+              <div key={index + 1}>
                 <DestCard
                   dest={dest}
                   onClick={e => this.toggleDrawer(true, false, dest.id)}
                 />
                 <AddButtonComponent
-                  onClick={() => this.toggleDrawer(true, true, index+1)}
+                  onClick={() => this.toggleDrawer(true, true, index + 1)}
                 />
               </div>
             );

@@ -8,6 +8,7 @@ import store from "./store";
 
 import Destinations from "./components/MainContainer";
 import SideBarComponent from "./components/sidebar/SideBarComponent"
+import AppMenuBar from "./components/AppMenuBar";
 
 import "./styles.css";
 const mql = window.matchMedia(`(min-width: 800px)`);
@@ -27,15 +28,15 @@ class App extends React.Component {
   componentWillMount() {
     mql.addListener(this.mediaQueryChanged);
   }
- 
+
   componentWillUnmount() {
     this.state.mql.removeListener(this.mediaQueryChanged);
   }
- 
+
   onSetSidebarOpen(open) {
     this.setState({ sidebarOpen: open });
   }
- 
+
   mediaQueryChanged() {
     this.setState({ sidebarDocked: mql.matches, sidebarOpen: false });
   }
@@ -44,20 +45,18 @@ class App extends React.Component {
     return (
       <Provider store={store}>
         <Sidebar
-          sidebar={<SideBarComponent/>}
+          sidebar={<SideBarComponent onSetOpen={this.onSetSidebarOpen} />}
           open={this.state.sidebarOpen}
           docked={this.state.sidebarDocked}
           onSetOpen={this.onSetSidebarOpen}
-          styles={{ sidebar: { background: "white" } }}
+          styles={{ sidebar: { background: "black", width: 300, color: "white" } }}
         >
           <Router>
             <div className="App">
               {!this.state.sidebarDocked &&
-                <button onClick={() => this.onSetSidebarOpen(true)}>
-                  Open sidebar
-                </button>
+                <AppMenuBar openSidebar={() => this.onSetSidebarOpen(true)} />
+                || <h1>BELTER</h1>
               }
-              <h1>BELTER</h1>
               <Route path="/">
                 <Destinations />
               </Route>
