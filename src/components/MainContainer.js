@@ -60,12 +60,14 @@ class Destinations extends React.Component {
   }
 
   render() {
-    let destinations = this.props.trips[this.props.currentTrip] ? this.props.trips[this.props.currentTrip].destinations : [];
+    let trip = this.props.trips[this.props.currentTrip];
+    let destinations = trip ? trip.destinations : [];
     if (!this.shouldComponentRender()) return (<p>Loading</p>)
+    if (this.props.error) return (<ErrorContainer />)
     return (
       <Container maxWidth="lg">
         <div>
-          <h2>Destinations</h2>
+          <h2>{trip ? trip.name : "Placeholder"}</h2>
           <AddButtonComponent
             onClick={() => this.toggleDrawer(true, true, 0)}
           />
@@ -95,8 +97,16 @@ class Destinations extends React.Component {
   }
 }
 
+const ErrorContainer = (props) => {
+  return (
+    <Container maxWidth="lg">
+      <p>Error Getting Trip details. Check your network connection</p>
+    </Container>
+  )
+}
+
 const mapStateToProps = state => {
-  const {currentTrip, trips, destinations, pending} = state;
-  return { currentTrip, trips, destinations, pending };
+  const {currentTrip, trips, destinations, pending, error} = state;
+  return { currentTrip, trips, destinations, pending, error };
 }
 export default connect(mapStateToProps, { setDestinations, getAllDestinations, fetchDestinations })(Destinations);

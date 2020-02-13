@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { Typography } from '@material-ui/core';
+import { Typography, Icon } from '@material-ui/core';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -13,6 +13,8 @@ import SendIcon from '@material-ui/icons/Send';
 
 import { connect } from 'react-redux';
 import { changeTrip } from '../../actions/DestinationActions';
+
+import {UserProfileComponent} from './UserProfileComponent';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -38,7 +40,7 @@ const SideBarComponent = (props) => {
     }
     return (
         <Container>
-            {/*<Typography>SideBarComponent</Typography>*/}
+            <UserProfileComponent user={{name:"Robert Abbott",username:"rabbit69",avatar:"<image>"}}/>
             <List
                 component="nav"
                 aria-labelledby="nested-list-subheader"
@@ -56,6 +58,10 @@ const SideBarComponent = (props) => {
                                 </ListItem>
                             )
                         })}
+                        <ListItem className={classes.nested}>                            
+                                    <Icon color="primary">add_circle</Icon>
+                                    <ListItemText primary="Add Trip" />
+                        </ListItem>
                     </List>
                 </Collapse>
             </List>
