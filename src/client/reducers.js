@@ -28,7 +28,7 @@ export default function destinationReducer(state = initialState, action) {
                 pending: true
             }
         case FETCH_DESTINATIONS_SUCCESS:
-            return Object.assign({}, state, {
+            return action.length ? Object.assign({}, state, {
                 trips: [{
                     _destinations: action.destinations,
                 }],
@@ -37,14 +37,14 @@ export default function destinationReducer(state = initialState, action) {
                 },
                 destinations: action.destinations,
                 pending: false
-            });
+            }) : state;
         case FETCH_TRIPS_SUCCESS:
-            return Object.assign({}, state, {
+            return action.trips.length ? Object.assign({}, state, {
                 trips: action.trips,
                 trip: action.trips[0],
                 destinations: action.trips[0].destinations,
                 pending: false
-            });
+            }) : state;
         case FETCH_DESTINATIONS_ERROR:
             return {
                 ...state,
@@ -74,7 +74,7 @@ export default function destinationReducer(state = initialState, action) {
 }
 
 const addDestination = (state, action) => {
-    const oldDests = state.trips[state.currentTrip].destinations;
+    const oldDests = state.trips[state.currentTrip] ? state.trips[state.currentTrip].destinations : [];
     const updatedTrip = Object.assign({}, state.trips[state.currentTrip], {
         destinations: [...oldDests.slice(0, action.position), action.destination, ...oldDests.slice(action.position)]
     });

@@ -61,17 +61,24 @@ class Destinations extends React.Component {
 
   render() {
     let trip = this.props.trips[this.props.currentTrip];
+    console.log(trip);
     let destinations = trip ? trip.destinations : [];
     if (!this.shouldComponentRender()) return (<p>Loading</p>)
     if (this.props.error) return (<ErrorContainer />)
     return (
       <Container maxWidth="lg">
         <div>
-          <h2>{trip ? trip.name : "Placeholder"}</h2>
-          <AddButtonComponent
-            onClick={() => this.toggleDrawer(true, true, 0)}
-          />
-          {destinations.map((dest, index) => {
+          {this.props.trips.length ? (() => {
+            return (
+              <React.Fragment>
+                <h2>{trip.name}</h2>
+                <AddButtonComponent
+                  onClick={() => this.toggleDrawer(true, true, 0)}
+                />
+              </React.Fragment>)
+          })() : <h2>You haven't added any trips yet!</h2>
+          }
+          {!!trip && destinations.map((dest, index) => {
             return (
               <div key={index + 1}>
                 <DestCard

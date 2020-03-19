@@ -5,7 +5,7 @@ export default function fetchDestinations(){
     return dispatch => {
         dispatch(fetchDestinationsPending());
         // fetch(process.env.DEV_API_ENDPOINT+'/api/trips/getTrips')
-        fetch('http://localhost:8080/data/getMock')
+        fetch('http://localhost:8080/data/getData')
         .then(res => res.json())
         .then(res => {
             if(res.error) {
@@ -17,6 +17,7 @@ export default function fetchDestinations(){
             return res;
         })
         .catch(error => {
+            console.log(error);
             dispatch(fetchDestinationsError(error));
         })
     }

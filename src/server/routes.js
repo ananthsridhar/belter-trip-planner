@@ -8,5 +8,6 @@ router.get('/',(req,res)=>{
 
 router.get('/getData',controller.getData);
 router.get('/getMock',controller.getMock);
+router.get('/seedDatabase',controller.seedDatabase);
 
 module.exports = router;
