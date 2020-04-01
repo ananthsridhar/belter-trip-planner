@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const WebpackPwaManifest = require('webpack-pwa-manifest')
 
 const outputDirectory = 'dist';
 
@@ -43,6 +44,22 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './public/index.html',
       favicon: './public/favicon.ico'
+    }),
+    new WebpackPwaManifest({
+      name: 'Belter - Trip Planner',
+      orientation: 'potrait',
+      short_name: 'Belter',
+      description: 'Plan It, Belt It',
+      background_color: '#ffffff',
+      theme_color: '#ffffff',
+      crossorigin: 'use-credentials', //can be null, use-credentials or anonymous
+      icons: [
+        {
+          src: path.resolve('./public/favicon.ico'),
+          sizes: '192x192',
+        }
+      ],
+      fingerprints: false
     })
   ]
 };

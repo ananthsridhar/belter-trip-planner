@@ -6,8 +6,8 @@ router.get('/',(req,res)=>{
     res.send('Data Page');
 });
 
-router.get('/getData',controller.getData);
-router.get('/getMock',controller.getMock);
+router.get('/trips',controller.getTrips);
+router.get('/mock',controller.getMock);
 router.get('/seedDatabase',controller.seedDatabase);
 
 module.exports = router;

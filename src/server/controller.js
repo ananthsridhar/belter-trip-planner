@@ -3,7 +3,7 @@ const Mock = require('./mock-dest');
 
 let Trip = require('./model/trip.model');
 
-exports.getData = (req, res) => {
+exports.getTrips = (req, res) => {
     Trip.find((err,trips) => {
         if(err) {
             console.log(err);

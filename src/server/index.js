@@ -11,8 +11,8 @@ app.use(cors());
 const PORT_NUMBER = 8080;
 
 // using separate routing for specific route section
-const data = require('./routes');
-app.use('/data',data);
+const routes = require('./routes');
+app.use('/api',routes);
 
 mongoose.connect('mongodb://127.0.0.1:27017/belter',{ useNewUrlParser: true, useUnifiedTopology: true });
 const connection = mongoose.connection;
