@@ -1,13 +1,20 @@
 const express = require('express');
 const router = express.Router();
-const controller = require('./controller');
+
+const tripController = require('./controller/tripsController');
+const utilController = require('./controller/utilController');
 
 router.get('/',(req,res)=>{
     res.send('Data Page');
 });
 
-router.get('/trips',controller.getTrips);
-router.get('/mock',controller.getMock);
-router.get('/seedDatabase',controller.seedDatabase);
+// Trips
+router.get('/trips',tripController.getTrips);
+router.post('/trips/add',tripController.addTrip);
+
+// Utilities
+router.get('/mock',utilController.getMock);
+router.get('/seedDatabase',utilController.seedDatabase);
+router.get('/resetDatabase',utilController.reSeedDatabase);
 
 module.exports = router;

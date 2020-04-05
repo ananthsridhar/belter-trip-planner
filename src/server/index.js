@@ -22,5 +22,5 @@ connection.once('open', () => {
 })
 
 app.listen(PORT_NUMBER,() => {
-    console.log("LIstening on "+PORT_NUMBER);
+    console.log("Listening on "+PORT_NUMBER);
 });

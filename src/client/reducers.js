@@ -1,8 +1,8 @@
 import {
-    GET_DESTINATION, GET_ALL_DESTINATIONS, SET_DESTINATIONS, FETCH_DESTINATIONS_PENDING,
+    GET_DESTINATION, GET_ALL_DESTINATIONS, SET_DESTINATIONS, FETCH_TRIPS_PENDING,
     FETCH_DESTINATIONS_SUCCESS,
     FETCH_TRIPS_SUCCESS, CHANGE_TRIP,
-    FETCH_DESTINATIONS_ERROR, ADD_DESTINATION,
+    FETCH_TRIPS_ERROR, ADD_DESTINATION,
     REMOVE_DESTINATION
 } from "./actions/DestinationActions";
 
@@ -22,7 +22,7 @@ const initialState = {
 export default function destinationReducer(state = initialState, action) {
     console.log(action);
     switch (action.type) {
-        case FETCH_DESTINATIONS_PENDING:
+        case FETCH_TRIPS_PENDING:
             return {
                 ...state,
                 pending: true
@@ -45,7 +45,7 @@ export default function destinationReducer(state = initialState, action) {
                 destinations: action.trips[0].destinations,
                 pending: false
             }) : state;
-        case FETCH_DESTINATIONS_ERROR:
+        case FETCH_TRIPS_ERROR:
             return {
                 ...state,
                 pending: false,
@@ -87,7 +87,6 @@ const addDestination = (state, action) => {
 const removeDestination = (state, action) => {
     let oldDests = state.trips[state.currentTrip].destinations;
     oldDests.splice(action.position,1);
-    console.log(oldDests);
     const updatedTrip = Object.assign({}, state.trips[state.currentTrip], {
         destinations: oldDests
     });

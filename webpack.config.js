@@ -47,18 +47,11 @@ module.exports = {
     }),
     new WebpackPwaManifest({
       name: 'Belter - Trip Planner',
-      orientation: 'potrait',
       short_name: 'Belter',
       description: 'Plan It, Belt It',
       background_color: '#ffffff',
       theme_color: '#ffffff',
       crossorigin: 'use-credentials', //can be null, use-credentials or anonymous
-      icons: [
-        {
-          src: path.resolve('./public/favicon.ico'),
-          sizes: '192x192',
-        }
-      ],
       fingerprints: false
     })
   ]

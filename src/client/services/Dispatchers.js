@@ -1,9 +1,9 @@
-import {fetchTripsPending,fetchDestinationsSuccess,fetchTripsSuccess,fetchDestinationsError} from "../actions/DestinationActions";
+import { fetchTripsPending,fetchDestinationsSuccess,fetchTripsSuccess,fetchTripsError } from "../actions/DestinationActions";
 
 
-export default function fetchDestinations(){
+export function fetchTrips(){
     return dispatch => {
-        dispatch(fetchDestinationsPending());
+        dispatch(fetchTripsPending());
         // fetch(process.env.DEV_API_ENDPOINT+'/api/trips/getTrips')
         fetch('http://localhost:8080/api/trips')
         .then(res => res.json())
@@ -18,7 +18,7 @@ export default function fetchDestinations(){
         })
         .catch(error => {
             console.log(error);
-            dispatch(fetchDestinationsError(error));
+            dispatch(fetchTripsError(error));
         })
     }
 }

@@ -1,19 +1,6 @@
 
-const Mock = require('./mock-dest');
-
-let Trip = require('./model/trip.model');
-
-exports.getTrips = (req, res) => {
-    Trip.find((err,trips) => {
-        if(err) {
-            console.log(err);
-        } else {
-            console.log("Got trips");
-            res.json(trips);
-        }
-    })
-    // res.send('Got Data');
-}
+const Mock = require('../resources/mock-dest');
+var Trip = require('../model/trip.model');
 
 exports.getMock = (req,res) => {
     console.log("Getting");
@@ -28,4 +15,12 @@ exports.seedDatabase = (req,res) => {
         .then(t => res.status(200).json({trip:"Seeding Successful"}))
         .catch(err => res.status(400).send(err))
     });
+}
+
+exports.reSeedDatabase = (req,res) => {
+    let trips = Mock;
+    Trip.remove().then(() => {
+        seedDatabase();
+    })
+    .catch(err => res.status(400).send(err))
 }

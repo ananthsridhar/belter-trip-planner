@@ -6,7 +6,8 @@ import { Container } from "@material-ui/core";
 
 import { connect } from "react-redux";
 import { setDestinations, getAllDestinations } from "../actions/DestinationActions";
-import fetchDestinations from "../services/fetchDestinations";
+// import fetchTrips from "../services/fetchTrips";
+import {fetchTrips} from "../services/Dispatchers";
 
 import AddButtonComponent from "./AddButtonComponent";
 import DestinationService from "../services/DestinationService";
@@ -26,8 +27,8 @@ class Destinations extends React.Component {
   }
 
   componentDidMount() {
-    const {fetchDestinations} = this.props;
-    fetchDestinations();
+    const {fetchTrips} = this.props;
+    fetchTrips();
     this.setState({
       trip: this.props.trips[this.props.currentTrip],
       // destinations: this.props.trip[this.props.currentTrip]._destinations
@@ -116,4 +117,4 @@ const mapStateToProps = state => {
   const {currentTrip, trips, destinations, pending, error} = state;
   return { currentTrip, trips, destinations, pending, error };
 }
-export default connect(mapStateToProps, { setDestinations, getAllDestinations, fetchDestinations })(Destinations);
+export default connect(mapStateToProps, { setDestinations, getAllDestinations, fetchTrips })(Destinations);

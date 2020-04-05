@@ -2,12 +2,10 @@ export const GET_DESTINATION = 'GET_DESTINATION'; // action types
 export const SET_DESTINATIONS = 'SET_DESTINATIONS';
 export const GET_ALL_DESTINATIONS = 'GET_ALL_DESTINATION';
 export const ADD_DESTINATION='ADD_DESTINATION';
-
-export const FETCH_DESTINATIONS_PENDING = 'FETCH_DESTINATIONS_PENDING';
 export const FETCH_DESTINATIONS_SUCCESS = 'FETCH_DESTINATIONS_SUCCESS';
 export const FETCH_DESTINATIONS_ERROR = 'FETCH_DESTINATIONS_ERROR';
 
-export const FETCH_TRIPS_PENDING = 'FETCH_DESTINATIONS_PENDING';
+export const FETCH_TRIPS_PENDING = 'FETCH_TRIPS_PENDING';
 export const FETCH_TRIPS_SUCCESS = 'FETCH_TRIPS_SUCCESS';
 export const FETCH_TRIPS_ERROR = 'FETCH_DESTINATIONS_ERROR';
 
@@ -35,9 +33,9 @@ export function getAllDestinations() {
     }
 }
 
-export function fetchDestinationsPending() {
+export function fetchTripsPending() {
     return {
-        type: FETCH_DESTINATIONS_PENDING
+        type: FETCH_TRIPS_PENDING
     }
 }
 
@@ -55,9 +53,9 @@ export function fetchTripsSuccess(trips) {
     }
 }
 
-export function fetchDestinationsError(error) {
+export function fetchTripsError(error) {
     return {
-        type: FETCH_DESTINATIONS_ERROR,
+        type: FETCH_TRIPS_ERROR,
         error: error
     }
 }
