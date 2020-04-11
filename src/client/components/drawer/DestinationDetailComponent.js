@@ -7,8 +7,6 @@ import { removeDestination } from "../../actions/DestinationActions";
 
 import { connect } from 'react-redux';
 
-import DestinationService from "../../services/DestinationService";
-
 const useStyles = makeStyles(theme => ({
   widget: {
     padding: theme.spacing(2)

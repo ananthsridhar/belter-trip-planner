@@ -1,29 +1,16 @@
-// import { destinations as mockDest } from "../mock/mockDestinations";
-import {fetchDestinationsPending,fetchDestinationsSuccess,fetchTripsSuccess,fetchDestinationsError} from "../actions/DestinationActions";
-
-export default class DestinationService {
-  constructor() {
-  }
-
-  fetchTrips() {
-    return dispatch => {
-      dispatch(fetchDestinationsPending());
-      // fetch(process.env.DEV_API_ENDPOINT+'/api/trips/getTrips')
-      fetch('http://localhost:8080/api/trips')
-        .then(res => res.json())
-        .then(res => {
-          if (res.error) {
-            throw (res.error);
-          }
-          // dispatch(fetchDestinationsSuccess(res));
-          console.log(res);
-          dispatch(fetchTripsSuccess(res));
-          return res;
-        })
-        .catch(error => {
-          console.log(error);
-          dispatch(fetchDestinationsError(error));
-        })
-    }
-  }
+export function addTrip(name) {
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name }),
+  };
+  return fetch('http://localhost:8080/api/trips/add', requestOptions)
+    .then(response => response.json())
+    .then((res) => {
+      if (res.error) {
+        throw res.error;
+      }
+      return res;
+    })
+    .catch(e => console.log(e));
 }

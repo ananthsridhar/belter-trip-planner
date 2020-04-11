@@ -4,7 +4,6 @@ import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 
-import DestinationService from "../../services/DestinationService";
 import Destination from "../../model/Destination";
 
 import {addDestination} from "../../actions/DestinationActions";
@@ -35,7 +34,6 @@ const useStyles = makeStyles(theme => ({
 function AddDestinationComponent(props) {
   const classes = useStyles();
   const [destination, setDestination] = React.useState("");
-  let destinationService = new DestinationService();
   const addDest = () => {
     let newDest = new Destination(destination);
     props.addDestination(newDest,props.addPos);
