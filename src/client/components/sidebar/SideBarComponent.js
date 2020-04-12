@@ -40,7 +40,7 @@ const SideBarComponent = (props) => {
   };
 
   const onTripClick = (id) => {
-    props.changeTrip(id);
+    props.changeTrips(id);
     props.onSetOpen(false);
   };
 
@@ -92,9 +92,6 @@ const SideBarComponent = (props) => {
 const mapStateToProps = state => ({
   trips: state.trips,
 });
+const changeTrips = tripId => dispatch => dispatch(changeTrip(tripId));
 
-const mapDispatchToProps = dispatch => ({
-  changeTrip: tripId => dispatch(changeTrip(tripId)),
-});
-
-export default connect(mapStateToProps, { mapDispatchToProps, fetchTrips })(SideBarComponent);
+export default connect(mapStateToProps, { changeTrips, fetchTrips })(SideBarComponent);
