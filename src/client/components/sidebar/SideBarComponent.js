@@ -27,6 +27,11 @@ const useStyles = makeStyles(theme => ({
   nested: {
     paddingLeft: theme.spacing(4),
   },
+  addButton: {
+    border: '1px solid white',
+    borderRadius: 10,
+    textAlign: 'center',
+  },
 }));
 
 const SideBarComponent = (props) => {
@@ -45,7 +50,6 @@ const SideBarComponent = (props) => {
   };
 
   const onTripAdd = (name) => {
-    // props.addTrip(name);
     addTrip(name).then((res) => {
       console.log(res);
       fetchTrips();
@@ -77,12 +81,12 @@ const SideBarComponent = (props) => {
                   <ListItemText primary={trip.name} />
                 </ListItem>
               ))}
-            <ListItem className={classes.nested} button onClick={() => setAddOpen(true)}>
-              <Icon color="primary">add_circle</Icon>
-              <ListItemText primary="Add Trip" />
-            </ListItem>
           </List>
         </Collapse>
+        <ListItem className={classes.addButton} button onClick={() => setAddOpen(true)}>
+          <Icon color="primary">add_circle</Icon>
+          <ListItemText primary="Add Trip" />
+        </ListItem>
       </List>
       <AddTripModal handleAdd={onTripAdd} open={addOpen} toggleOpen={o => setAddOpen(o)} />
     </Container>
