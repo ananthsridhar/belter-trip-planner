@@ -7,8 +7,8 @@ import DestImage from "../rand.png";
 
 const useStyles = makeStyles({
   card: {
-    display: "flex",
-    flexDirection: "row"
+    display: 'flex',
+    flexDirection: 'row'
   },
   title: {
     fontSize: 14

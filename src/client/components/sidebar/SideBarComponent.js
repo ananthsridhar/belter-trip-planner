@@ -4,15 +4,13 @@ import Container from '@material-ui/core/Container';
 import { Typography, Icon } from '@material-ui/core';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import SendIcon from '@material-ui/icons/Send';
 
 import { connect } from 'react-redux';
-import { changeTrip } from '../../actions/DestinationActions';
+import { changeTrip, updateTrip } from '../../actions/DestinationActions';
 import { fetchTrips } from '../../services/Dispatchers';
 import { addTrip } from '../../services/DestinationService';
 
@@ -34,25 +32,27 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const SideBarComponent = (props) => {
+const SideBarComponent = props => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const [addOpen, setAddOpen] = React.useState(false);
-  const { fetchTrips } = props;
+  const { fetchTrips, changeTrips, updateTrips } = props;
 
   const handleClick = () => {
     setOpen(!open);
   };
 
-  const onTripClick = (id) => {
+  const onTripClick = id => {
     props.changeTrips(id);
     props.onSetOpen(false);
   };
 
-  const onTripAdd = (name) => {
-    addTrip(name).then((res) => {
+  const onTripAdd = name => {
+    addTrip(name).then(res => {
       console.log(res);
-      fetchTrips();
+      updateTrips(res);
+      changeTrips(res._id);
+      // fetchTrips();
     });
     console.log(name);
     setAddOpen(false);
@@ -70,8 +70,8 @@ const SideBarComponent = (props) => {
         </ListItem>
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-            {props.trips
-              && props.trips.map(trip => (
+            {props.trips &&
+              props.trips.map(trip => (
                 <ListItem
                   key={trip._id}
                   button
@@ -97,5 +97,6 @@ const mapStateToProps = state => ({
   trips: state.trips,
 });
 const changeTrips = tripId => dispatch => dispatch(changeTrip(tripId));
+const updateTrips = tripId => dispatch => dispatch(updateTrip(tripId));
 
-export default connect(mapStateToProps, { changeTrips, fetchTrips })(SideBarComponent);
+export default connect(mapStateToProps, { changeTrips, fetchTrips, updateTrips })(SideBarComponent);

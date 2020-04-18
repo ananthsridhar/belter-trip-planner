@@ -11,7 +11,7 @@ export const FETCH_TRIPS_ERROR = 'FETCH_DESTINATIONS_ERROR';
 
 export const REMOVE_DESTINATION = 'REMOVE_DESTINATION';
 
-export const ADD_TRIP = 'ADD_TRIP';
+export const UPDATE_TRIP = 'UPDATE_TRIP';
 export const CHANGE_TRIP = 'CHANGE_TRIP';
 
 export function getDestination(id) {
@@ -76,10 +76,10 @@ export function changeTrip(tripId) {
   };
 }
 
-export function addTrip(name) {
+export function updateTrip(trip) {
   return {
-    type: ADD_TRIP,
-    name,
+    type: UPDATE_TRIP,
+    trip,
   };
 }
 

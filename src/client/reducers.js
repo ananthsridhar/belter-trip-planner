@@ -8,6 +8,7 @@ import {
   FETCH_TRIPS_ERROR,
   ADD_DESTINATION,
   REMOVE_DESTINATION,
+  UPDATE_TRIP,
 } from './actions/DestinationActions';
 import { Trip } from './model/Trip';
 
@@ -47,6 +48,23 @@ const removeDestination = (state, action) => {
   return Object.assign({}, state, {
     trips: state.trips.map((item, index) => (index !== state.currentTrip ? item : updatedTrip)),
   });
+};
+
+const updateTrip = (state, action) => {
+  let newState = {};
+  const i = state.trips.indexOf(action.trip._id);
+  // Existing Trip
+  if (i > -1) {
+    newState = Object.assign({}, state, {
+      trips: state.trips.map((item, index) => (index !== i ? item : action.trip)),
+    });
+  } else {
+    // New Trip
+    newState = Object.assign({}, state, {
+      trips: [...state.trips, action.trip],
+    });
+  }
+  return newState;
 };
 
 export default function destinationReducer(state = initialState, action) {
@@ -99,6 +117,8 @@ export default function destinationReducer(state = initialState, action) {
         },
         destinations: [...state.destinations, action.destinations],
       });
+    case UPDATE_TRIP:
+      return updateTrip(state, action);
     case ADD_DESTINATION:
       return addDestination(state, action);
     case REMOVE_DESTINATION:
