@@ -37,13 +37,12 @@ export function updateTrip(trip) {
     console.log('Called');
     dispatch(fetchTripsPending());
     // fetch(process.env.DEV_API_ENDPOINT+'/api/trips/getTrips')
-    fetch('http://localhost:8080/api/trips/add', requestOptions)
+    fetch('http://localhost:8080/api/trips/update', requestOptions)
       .then(res => res.json())
       .then((res) => {
         if (res.error) {
           throw res.error;
         }
-        // dispatch(fetchDestinationsSuccess(res));
         console.log(res);
         dispatch(fetchTripsSuccess(res));
         return res;

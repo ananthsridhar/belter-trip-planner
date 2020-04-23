@@ -20,3 +20,13 @@ exports.addTrip = (req, res) => {
     res.send(trip);
   });
 };
+
+exports.updateTrip = (req, res) => {
+  console.log(req.body);
+  const query = {_id : req.body._id};
+  Trip.findOneAndUpdate(query, req.body,{upsert: false}, (err, doc) => {
+    if(err) res.send(500, {error:err});
+    console.log(doc);
+    return res.send('Updated Successfully');
+  });
+}
