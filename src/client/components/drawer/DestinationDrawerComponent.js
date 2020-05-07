@@ -11,7 +11,7 @@ export default function DestinationDrawerComponent(props) {
     }
   });
   const classes = useStyles();
-  const toggleDrawer = open => event => {
+  const toggleDrawer = open => (event) => {
     if (
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
@@ -21,12 +21,11 @@ export default function DestinationDrawerComponent(props) {
     props.toggleDrawer(open);
   };
 
-  const onAddDestination = dest => {
-    if(!dest)
-      props.toggleDrawer(false);
+  const onAddDestination = (dest) => {
+    if(!dest) props.toggleDrawer(false);
   };
 
-  //Template for Destination Page 
+  // Template for Destination Page 
   const destDetail = () => (
     <div
       className={classes.drawerStyle}
@@ -51,7 +50,7 @@ export default function DestinationDrawerComponent(props) {
   return (
     <Drawer anchor="bottom" open={props.drawer} onClose={toggleDrawer(false)}>
       <Container fixed style={{height:'100vh'}}>
-        {/*Displaying information based on if Adding Destination or Destination Detail page*/}
+        {/* Displaying information based on if Adding Destination or Destination Detail page */}
         {!props.addDest && destDetail()}
         {props.addDest && addDestination()}
       </Container>

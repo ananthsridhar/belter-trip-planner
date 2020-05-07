@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { Typography, Icon } from '@material-ui/core';
+import { Typography, Icon, Button } from '@material-ui/core';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -10,7 +10,7 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 
 import { connect } from 'react-redux';
-import { changeTrip, updateTrip } from '../../actions/DestinationActions';
+import { changeTrip, updateTripSuccess } from '../../actions/DestinationActions';
 import { fetchTrips } from '../../services/Dispatchers';
 import { addTrip } from '../../services/DestinationService';
 
@@ -18,9 +18,18 @@ import { UserProfileComponent } from './UserProfileComponent';
 import { AddTripModal } from './AddTripModal';
 
 const useStyles = makeStyles(theme => ({
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
   root: {
     width: '100%',
+    flex: 1,
     maxWidth: 500,
+    overflow: 'auto',
+  },
+  inner: {
+    overflow: 'auto',
   },
   nested: {
     paddingLeft: theme.spacing(4),
@@ -30,36 +39,43 @@ const useStyles = makeStyles(theme => ({
     borderRadius: 10,
     textAlign: 'center',
   },
+  syncButton: {
+    width: '100%',
+    alignSelf: 'bottom',
+    marginTop: 10,
+    marginBottom: 10,
+  },
 }));
 
-const SideBarComponent = props => {
+const SideBarComponent = (props) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const [addOpen, setAddOpen] = React.useState(false);
-  const { fetchTrips, changeTrips, updateTrips } = props;
+  const {
+    changeTrips, updateTrips, trips, inSync
+  } = props;
 
   const handleClick = () => {
     setOpen(!open);
   };
 
-  const onTripClick = id => {
-    props.changeTrips(id);
+  const onTripClick = (id) => {
+    changeTrips(id);
     props.onSetOpen(false);
   };
 
-  const onTripAdd = name => {
-    addTrip(name).then(res => {
+  const onTripAdd = (name) => {
+    addTrip(name).then((res) => {
       console.log(res);
       updateTrips(res);
       changeTrips(res._id);
-      // fetchTrips();
     });
     console.log(name);
     setAddOpen(false);
   };
 
   return (
-    <Container>
+    <Container className={classes.container}>
       <UserProfileComponent
         user={{ name: 'Robert Abbott', username: 'rabbit69', avatar: '<image>' }}
       />
@@ -68,10 +84,10 @@ const SideBarComponent = props => {
           <ListItemText primary="Trips" />
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
-        <Collapse in={open} timeout="auto" unmountOnExit>
+        <Collapse in={open} timeout="auto" unmountOnExit className={classes.inner}>
           <List component="div" disablePadding>
-            {props.trips &&
-              props.trips.map(trip => (
+            {trips
+              && trips.map(trip => (
                 <ListItem
                   key={trip._id}
                   button
@@ -83,11 +99,17 @@ const SideBarComponent = props => {
               ))}
           </List>
         </Collapse>
-        <ListItem className={classes.addButton} button onClick={() => setAddOpen(true)}>
-          <Icon color="primary">add_circle</Icon>
-          <ListItemText primary="Add Trip" />
-        </ListItem>
       </List>
+      <Button className={classes.syncButton} variant="outlined" color="primary">
+        <Icon color="primary">add_circle</Icon>
+        Add Trip
+        <Icon color="primary">add_circle</Icon>
+      </Button>
+      {!inSync && (
+        <Button className={classes.syncButton} variant="outlined" color="secondary">
+          Click To Sync
+        </Button>
+      )}
       <AddTripModal handleAdd={onTripAdd} open={addOpen} toggleOpen={o => setAddOpen(o)} />
     </Container>
   );
@@ -95,8 +117,9 @@ const SideBarComponent = props => {
 
 const mapStateToProps = state => ({
   trips: state.trips,
+  inSync: state.inSync,
 });
 const changeTrips = tripId => dispatch => dispatch(changeTrip(tripId));
-const updateTrips = tripId => dispatch => dispatch(updateTrip(tripId));
+const updateTrips = trip => dispatch => dispatch(updateTripSuccess(trip));
 
 export default connect(mapStateToProps, { changeTrips, fetchTrips, updateTrips })(SideBarComponent);

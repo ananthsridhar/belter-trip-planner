@@ -2,6 +2,7 @@ import {
   fetchTripsPending,
   fetchTripsSuccess,
   fetchTripsError,
+  updateTripSuccess,
 } from '../actions/DestinationActions';
 
 export function fetchTrips() {
@@ -44,7 +45,7 @@ export function updateTrip(trip) {
           throw res.error;
         }
         console.log(res);
-        dispatch(fetchTripsSuccess(res));
+        dispatch(updateTripSuccess(res));
         return res;
       })
       .catch((error) => {
@@ -53,3 +54,15 @@ export function updateTrip(trip) {
       });
   };
 }
+
+/* TODO : Keep function for use in case Syncing Trips wholly doesnt work out
+export function addDestination(trip, destination, pos) {
+  console.log(destination);
+  const oldDests = trip.destinations || [];
+  const updatedTrip = Object.assign({}, trip, {
+    destinations: [...oldDests.slice(0, pos), destination, ...oldDests.slice(pos)],
+  });
+  console.log(updatedTrip);
+  // updateTrip(updatedTrip);
+}
+*/

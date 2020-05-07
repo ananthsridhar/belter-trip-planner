@@ -76,7 +76,7 @@ export function changeTrip(tripId) {
   };
 }
 
-export function updateTrip(trip) {
+export function updateTripSuccess(trip) {
   return {
     type: UPDATE_TRIP,
     trip,

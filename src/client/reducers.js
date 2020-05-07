@@ -19,6 +19,26 @@ const initialState = {
   destinations: [],
   pending: false,
   error: null,
+  inSync: false,
+};
+
+const updateTrip = (state, trip) => {
+  let newState = {};
+  const i = state.trips.findIndex(t => t._id === trip._id);
+  // Existing Trip
+  if (i > -1) {
+    newState = Object.assign({}, state, {
+      trips: state.trips.map((item, index) => (index !== i ? item : trip)),
+      inSync: false,
+    });
+  } else {
+    // New Trip
+    newState = Object.assign({}, state, {
+      trips: [...state.trips, trip],
+      inSync: false,
+    });
+  }
+  return newState;
 };
 
 const addDestination = (state, action) => {
@@ -33,9 +53,7 @@ const addDestination = (state, action) => {
     ],
   });
   console.log(updatedTrip);
-  return Object.assign({}, state, {
-    trips: state.trips.map((item, index) => (index !== state.currentTrip ? item : updatedTrip)),
-  });
+  return updateTrip(state, updatedTrip);
 };
 
 const removeDestination = (state, action) => {
@@ -45,26 +63,7 @@ const removeDestination = (state, action) => {
     destinations: oldDests,
   });
   console.log(updatedTrip);
-  return Object.assign({}, state, {
-    trips: state.trips.map((item, index) => (index !== state.currentTrip ? item : updatedTrip)),
-  });
-};
-
-const updateTrip = (state, action) => {
-  let newState = {};
-  const i = state.trips.indexOf(action.trip._id);
-  // Existing Trip
-  if (i > -1) {
-    newState = Object.assign({}, state, {
-      trips: state.trips.map((item, index) => (index !== i ? item : action.trip)),
-    });
-  } else {
-    // New Trip
-    newState = Object.assign({}, state, {
-      trips: [...state.trips, action.trip],
-    });
-  }
-  return newState;
+  return updateTrip(state, updatedTrip);
 };
 
 export default function destinationReducer(state = initialState, action) {
@@ -75,21 +74,6 @@ export default function destinationReducer(state = initialState, action) {
         ...state,
         pending: true,
       };
-    case FETCH_DESTINATIONS_SUCCESS:
-      return action.length
-        ? Object.assign({}, state, {
-          trips: [
-            {
-              _destinations: action.destinations,
-            },
-          ],
-          trip: {
-            _destinations: action.destinations,
-          },
-          destinations: action.destinations,
-          pending: false,
-        })
-        : state;
     case FETCH_TRIPS_SUCCESS:
       return action.trips.length
         ? Object.assign({}, state, {
@@ -97,6 +81,7 @@ export default function destinationReducer(state = initialState, action) {
           trip: action.trips[0],
           destinations: action.trips[0].destinations,
           pending: false,
+          inSync: true,
         })
         : state;
     case FETCH_TRIPS_ERROR:
@@ -118,7 +103,7 @@ export default function destinationReducer(state = initialState, action) {
         destinations: [...state.destinations, action.destinations],
       });
     case UPDATE_TRIP:
-      return updateTrip(state, action);
+      return updateTrip(state, action.trip);
     case ADD_DESTINATION:
       return addDestination(state, action);
     case REMOVE_DESTINATION:

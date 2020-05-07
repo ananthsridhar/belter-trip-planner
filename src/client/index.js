@@ -1,26 +1,26 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Sidebar from 'react-sidebar';
+
+import { Provider } from 'react-redux';
 import registerServiceWorker from './registerServiceWorker';
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import Sidebar from "react-sidebar";
+import store from './store';
 
-import { Provider } from "react-redux";
-import store from "./store";
+import Destinations from './components/MainContainer';
+import SideBarComponent from './components/sidebar/SideBarComponent';
+import AppMenuBar from './components/AppMenuBar';
 
-import Destinations from "./components/MainContainer";
-import SideBarComponent from "./components/sidebar/SideBarComponent"
-import AppMenuBar from "./components/AppMenuBar";
+import './styles.css';
 
-import "./styles.css";
-const mql = window.matchMedia(`(min-width: 800px)`);
+const mql = window.matchMedia('(min-width: 800px)');
 
 class App extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
       sidebarDocked: mql.matches,
-      sidebarOpen: false
+      sidebarOpen: false,
     };
     this.mediaQueryChanged = this.mediaQueryChanged.bind(this);
     this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
@@ -43,21 +43,25 @@ class App extends React.Component {
   }
 
   render() {
+    const {sidebarOpen, sidebarDocked} = this.state;
     return (
       <Provider store={store}>
         <Sidebar
           sidebar={<SideBarComponent onSetOpen={this.onSetSidebarOpen} />}
-          open={this.state.sidebarOpen}
-          docked={this.state.sidebarDocked}
+          open={sidebarOpen}
+          docked={sidebarDocked}
           onSetOpen={this.onSetSidebarOpen}
-          styles={{ sidebar: { background: "black", width: 300, color: "white" } }}
+          styles={{
+            sidebar: {
+              background: 'black', width: 300, color: 'white', display: 'flex'
+            }
+          }}
         >
           <Router>
             <div className="App">
-              {!this.state.sidebarDocked &&
+              {(!sidebarDocked && (
                 <AppMenuBar openSidebar={() => this.onSetSidebarOpen(true)} />
-                || <h1>BELTER</h1>
-              }
+              )) || <h1>BELTER</h1>}
               <Route path="/">
                 <Destinations />
               </Route>
@@ -69,6 +73,6 @@ class App extends React.Component {
   }
 }
 
-const rootElement = document.getElementById("root");
+const rootElement = document.getElementById('root');
 ReactDOM.render(<App />, rootElement);
 registerServiceWorker();
