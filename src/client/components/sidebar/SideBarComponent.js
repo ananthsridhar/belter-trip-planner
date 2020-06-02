@@ -100,7 +100,12 @@ const SideBarComponent = (props) => {
           </List>
         </Collapse>
       </List>
-      <Button className={classes.syncButton} variant="outlined" color="primary">
+      <Button
+        className={classes.syncButton}
+        variant="outlined"
+        color="primary"
+        onClick={() => setAddOpen(true)}
+      >
         <Icon color="primary">add_circle</Icon>
         Add Trip
         <Icon color="primary">add_circle</Icon>
