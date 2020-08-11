@@ -33,8 +33,8 @@ function DestinationDetail(props) {
     <div style={{ textAlign: 'center' }}>
       <h1>{destination && destination.name}</h1>
       <Grid container spacing={3}>
-        {widgets &&
-          widgets.map((widget, index) => (
+        {widgets
+          && widgets.map((widget, index) => (
             <Grid key={index} item xs={6}>
               <Widget widget={widget} />
             </Grid>

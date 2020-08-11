@@ -44,7 +44,7 @@ export default function DestinationDrawerComponent(props) {
       <p>Adding Destination</p>
       <AddDestinationComponent
         addPos={props.currentDest}
-        onAddDestination={dest => onAddDestination()}
+        onAddDestination={() => onAddDestination()}
       />
     </div>
   );

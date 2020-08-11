@@ -1,22 +1,22 @@
-import React from "react";
-import { Paper, Button, makeStyles } from "@material-ui/core";
-import InputBase from "@material-ui/core/InputBase";
-import IconButton from "@material-ui/core/IconButton";
-import SearchIcon from "@material-ui/icons/Search";
+import React from 'react';
+import { Paper, Button, makeStyles } from '@material-ui/core';
+import InputBase from '@material-ui/core/InputBase';
+import IconButton from '@material-ui/core/IconButton';
+import SearchIcon from '@material-ui/icons/Search';
 
-import Destination from "../../model/Destination";
+import Destination from '../../model/Destination';
 
-import {addDestination} from "../../actions/DestinationActions";
+import { addDestination } from '../../actions/DestinationActions';
 
 import { connect } from 'react-redux';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: "2px 4px",
-    display: "flex",
-    alignItems: "center",
-    border: "2px solid #568cf0",
-    borderRadius: "10px"
+    padding: '2px 4px',
+    display: 'flex',
+    alignItems: 'center',
+    border: '2px solid #568cf0',
+    borderRadius: '10px'
   },
   input: {
     marginLeft: theme.spacing(1),
@@ -33,9 +33,9 @@ const useStyles = makeStyles(theme => ({
 
 function AddDestinationComponent(props) {
   const classes = useStyles();
-  const [destination, setDestination] = React.useState("");
+  const [destination, setDestination] = React.useState('');
   const addDest = () => {
-    let newDest = new Destination(destination);
+    const newDest = new Destination(destination);
     props.addDestination(newDest,props.addPos);
     props.onAddDestination(destination);
   };
@@ -45,7 +45,7 @@ function AddDestinationComponent(props) {
       <InputBase
         className={classes.input}
         placeholder="Search Google Maps"
-        inputProps={{ "aria-label": "search google maps" }}
+        inputProps={{ 'aria-label': 'search google maps' }}
         value={destination}
         onChange={e => setDestination(e.target.value)}
       />
@@ -60,12 +60,12 @@ function AddDestinationComponent(props) {
 
 const mapStateToProps = state => ({
   destinations: state.destinations
-})
+});
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    addDestination : (destination,addPos) => dispatch(addDestination(destination,addPos)),
-  }
-}
+    addDestination: (destination, addPos) => dispatch(addDestination(destination, addPos)),
+  };
+};
 
-export default connect(mapStateToProps,mapDispatchToProps)(AddDestinationComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(AddDestinationComponent);
