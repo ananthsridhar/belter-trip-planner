@@ -1,20 +1,22 @@
-import React from "react";
-import { Container, Drawer, makeStyles, Button } from "@material-ui/core";
+import React from 'react';
+import {
+  Container, Drawer, makeStyles, Button
+} from '@material-ui/core';
 
-import AddDestinationComponent from "./AddDestinationComponent";
-import DestinationDetail from "./DestinationDetailComponent";
+import AddDestinationComponent from './AddDestinationComponent';
+import DestinationDetail from './DestinationDetailComponent';
 
 export default function DestinationDrawerComponent(props) {
   const useStyles = makeStyles({
     drawerStyle: {
-      width: "auto",
+      width: 'auto',
     }
   });
   const classes = useStyles();
   const toggleDrawer = open => (event) => {
     if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
+      event.type === 'keydown'
+      && (event.key === 'Tab' || event.key === 'Shift')
     ) {
       return;
     }
@@ -22,34 +24,34 @@ export default function DestinationDrawerComponent(props) {
   };
 
   const onAddDestination = (dest) => {
-    if(!dest) props.toggleDrawer(false);
+    if (!dest) props.toggleDrawer(false);
   };
 
-  // Template for Destination Page 
+  // Template for Destination Page
   const destDetail = () => (
     <div
       className={classes.drawerStyle}
       role="presentation"
       onKeyDown={toggleDrawer(false)}
     >
-      <DestinationDetail destId={props.currentDest} toggleDrawer={() => props.toggleDrawer(false)}/>
+      <DestinationDetail destId={props.currentDest} toggleDrawer={() => props.toggleDrawer(false)} />
     </div>
   );
 
-  //Template for Add Destination Page
+  // Template for Add Destination Page
   const addDestination = () => (
     <div className={classes.drawerStyle} role="presentation">
       <p>Adding Destination</p>
       <AddDestinationComponent
         addPos={props.currentDest}
-        onAddDestination={(dest)=>onAddDestination()}
+        onAddDestination={dest => onAddDestination()}
       />
     </div>
   );
 
   return (
     <Drawer anchor="bottom" open={props.drawer} onClose={toggleDrawer(false)}>
-      <Container fixed style={{height:'100vh'}}>
+      <Container fixed style={{ height: '100vh' }}>
         {/* Displaying information based on if Adding Destination or Destination Detail page */}
         {!props.addDest && destDetail()}
         {props.addDest && addDestination()}

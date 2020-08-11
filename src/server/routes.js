@@ -1,11 +1,12 @@
 const express = require('express');
+
 const router = express.Router();
 
-const tripController = require('./controller/tripsController');
-const utilController = require('./controller/utilController');
+const tripController = require('./routes/trips');
+const utilController = require('./resources/util');
 
 router.get('/', (req, res) => {
-    res.send('Data Page');
+  res.send('Data Page');
 });
 
 // Trips
