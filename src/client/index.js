@@ -43,7 +43,7 @@ class App extends React.Component {
   }
 
   render() {
-    const {sidebarOpen, sidebarDocked} = this.state;
+    const { sidebarOpen, sidebarDocked } = this.state;
     return (
       <Provider store={store}>
         <Sidebar
@@ -53,8 +53,11 @@ class App extends React.Component {
           onSetOpen={this.onSetSidebarOpen}
           styles={{
             sidebar: {
-              background: 'black', width: 300, color: 'white', display: 'flex'
-            }
+              background: 'black',
+              width: 300,
+              color: 'white',
+              display: 'flex',
+            },
           }}
         >
           <Router>

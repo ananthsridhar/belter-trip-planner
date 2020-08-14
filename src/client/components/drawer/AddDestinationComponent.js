@@ -4,11 +4,11 @@ import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 
+import { connect } from 'react-redux';
 import Destination from '../../model/Destination';
 
 import { addDestination } from '../../actions/DestinationActions';
 
-import { connect } from 'react-redux';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -36,7 +36,7 @@ function AddDestinationComponent(props) {
   const [destination, setDestination] = React.useState('');
   const addDest = () => {
     const newDest = new Destination(destination);
-    props.addDestination(newDest,props.addPos);
+    props.addDestination(newDest, props.addPos);
     props.onAddDestination(destination);
   };
 
@@ -62,10 +62,8 @@ const mapStateToProps = state => ({
   destinations: state.destinations
 });
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addDestination: (destination, addPos) => dispatch(addDestination(destination, addPos)),
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  addDestination: (destination, addPos) => dispatch(addDestination(destination, addPos)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddDestinationComponent);

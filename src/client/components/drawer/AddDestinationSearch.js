@@ -1,10 +1,10 @@
 import React from 'react';
-import PlacesAutocomplete from "react-places-autocomplete";
+import PlacesAutocomplete from 'react-places-autocomplete';
 import {
   geocodeByAddress,
   geocodeByPlaceId,
   getLatLng,
-} from "react-places-autocomplete";
+} from 'react-places-autocomplete';
 
 /* Component Created to implement AutoComplete Search using GMaps API. Have to uncomment Script inclusion in the index.html to use */
 export default class AddDestinationSearch extends React.Component {
@@ -33,7 +33,9 @@ export default class AddDestinationSearch extends React.Component {
         onChange={this.handleChange}
         onSelect={this.handleSelect}
       >
-        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+        {({
+          getInputProps, suggestions, getSuggestionItemProps, loading
+        }) => (
           <div>
             <input
               {...getInputProps({

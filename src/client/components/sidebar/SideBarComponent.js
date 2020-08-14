@@ -107,11 +107,13 @@ const SideBarComponent = (props) => {
         onClick={() => setAddOpen(true)}
       >
         <Icon color="primary">add_circle</Icon>
+
         Add Trip
         <Icon color="primary">add_circle</Icon>
       </Button>
       {!inSync && (
         <Button className={classes.syncButton} variant="outlined" color="secondary">
+
           Click To Sync
         </Button>
       )}

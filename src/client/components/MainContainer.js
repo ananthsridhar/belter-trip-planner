@@ -74,8 +74,8 @@ class Destinations extends React.Component {
           ) : (
             <h2>You haven't added any trips yet!</h2>
           )}
-          {!!trip &&
-            destinations.map((dest, index) => (
+          {!!trip
+            && destinations.map((dest, index) => (
               <div key={index + 1}>
                 <DestCard dest={dest} onClick={e => this.toggleDrawer(true, false, dest.id)} />
                 <AddButtonComponent onClick={() => this.toggleDrawer(true, true, index + 1)} />
@@ -100,8 +100,10 @@ const ErrorContainer = props => (
   </Container>
 );
 
-const mapStateToProps = state => {
-  const { currentTrip, trips, destinations, pending, error } = state;
+const mapStateToProps = (state) => {
+  const {
+    currentTrip, trips, destinations, pending, error
+  } = state;
   return {
     currentTrip,
     trips,

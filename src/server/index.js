@@ -4,7 +4,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const config = require('./resources/config');
 
-//Initializing express app
+// Initializing express app
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -20,9 +20,9 @@ mongoose.connect(`${config.MONGO_HOST}/belter`, { useNewUrlParser: true, useUnif
 const { connection } = mongoose;
 
 connection.once('open', () => {
-    console.log('Connection to MongoDB Established successfully');
+  console.log('Connection to MongoDB Established successfully');
 });
 
 app.listen(PORT_NUMBER, () => {
-    console.log(`Listening on ${config.PORT}`);
+  console.log(`Listening on ${config.PORT}`);
 });

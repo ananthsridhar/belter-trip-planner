@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Container, Typography } from "@material-ui/core";
+import { Container, Typography } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import { deepOrange } from '@material-ui/core/colors';
 
@@ -19,12 +19,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export const UserProfileComponent = (props) => {
-    const classes = useStyles();
-    return (
-        <Container className={classes.root}>
-            <Avatar className={classes.orange}>U</Avatar>
-            <Typography>{props.user.name}</Typography>
-        </Container>
-    )
-
-}
+  const classes = useStyles();
+  return (
+    <Container className={classes.root}>
+      <Avatar className={classes.orange}>U</Avatar>
+      <Typography>{props.user.name}</Typography>
+    </Container>
+  );
+};

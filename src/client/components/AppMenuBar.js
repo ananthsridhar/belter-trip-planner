@@ -40,6 +40,7 @@ function AppMenuBar(props) {
           </Badge>
         </IconButton>
         <Typography variant="h6" className={classes.title}>
+
           BELTER
         </Typography>
       </Toolbar>

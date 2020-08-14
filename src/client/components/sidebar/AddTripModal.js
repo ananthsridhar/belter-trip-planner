@@ -43,9 +43,11 @@ export const AddTripModal = (props) => {
       </DialogContent>
       <DialogActions>
         <Button onClick={() => props.toggleOpen(false)} color="primary">
+
           Cancel
         </Button>
         <Button onClick={handleAdd} color="primary">
+
           Lets Belt!
         </Button>
       </DialogActions>
